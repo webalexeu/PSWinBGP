@@ -7,7 +7,10 @@
     #    'Warning'
     #)
     #IncludeDefaultRules=${true}
-    #ExcludeRules = @()
+    ExcludeRules = @(
+        'PSMissingModuleManifestField',
+        'PSReviewUnusedParameter'
+    )
     #IncludeRules = @(
     #    'PSAvoidUsingWriteHost',
     #    'MyCustomRuleName'

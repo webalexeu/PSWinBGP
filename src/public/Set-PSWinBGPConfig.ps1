@@ -25,7 +25,7 @@ function Set-PSWinBGPConfig {
         Localhost Api Timeout (Default: 5s)
 
     #>
-    [CmdletBinding(SupportsShouldProcess=$true)]
+    [CmdletBinding(SupportsShouldProcess = $true)]
     param(
         [Int]$ApiPort,
         [string]$ApiProtocol,
@@ -35,15 +35,14 @@ function Set-PSWinBGPConfig {
         [Int]$LocalhostApiTimeout
     )
 
-    if ($pscmdlet.ShouldProcess('$Script:PSWinBGP','Set config')) {
-        Switch ($PSBoundParameters.Keys)
-        {
-            'ApiPort'               { $Script:PSWinBGP.ApiPort = $ApiPort }
-            'ApiProtocol'           { $Script:PSWinBGP.ApiProtocol = $ApiProtocol }
-            'ApiTimeout'            { $Script:PSWinBGP.ApiTimeout = $ApiTimeout }
-            'LocalhostApiPort'      { $Script:PSWinBGP.LocalhostApiPort = $LocalhostApiPort }
-            'LocalhostApiProtocol'  { $Script:PSWinBGP.LocalhostApiProtocol = $LocalhostApiProtocol }
-            'LocalhostApiTimeout'   { $Script:PSWinBGP.LocalhostApiTimeout = $LocalhostApiTimeout }
+    if ($pscmdlet.ShouldProcess('$Script:PSWinBGP', 'Set config')) {
+        Switch ($PSBoundParameters.Keys) {
+            'ApiPort' { $Script:PSWinBGP.ApiPort = $ApiPort }
+            'ApiProtocol' { $Script:PSWinBGP.ApiProtocol = $ApiProtocol }
+            'ApiTimeout' { $Script:PSWinBGP.ApiTimeout = $ApiTimeout }
+            'LocalhostApiPort' { $Script:PSWinBGP.LocalhostApiPort = $LocalhostApiPort }
+            'LocalhostApiProtocol' { $Script:PSWinBGP.LocalhostApiProtocol = $LocalhostApiProtocol }
+            'LocalhostApiTimeout' { $Script:PSWinBGP.LocalhostApiTimeout = $LocalhostApiTimeout }
         }
     }
 }

@@ -1,5 +1,5 @@
 # Dot source public/private functions
-$public  = @(Get-ChildItem -Path (Join-Path -Path $PSScriptRoot -ChildPath 'Public/*.ps1')  -Recurse -ErrorAction Stop)
+$public = @(Get-ChildItem -Path (Join-Path -Path $PSScriptRoot -ChildPath 'Public/*.ps1') -Recurse -ErrorAction Stop)
 $private = @(Get-ChildItem -Path (Join-Path -Path $PSScriptRoot -ChildPath 'Private/*.ps1') -Recurse -ErrorAction Stop)
 foreach ($import in @($public + $private)) {
     try {
@@ -13,7 +13,13 @@ Export-ModuleMember -Function $public.Basename
 
 # Route Argument Completer
 $ArgumentCompleterBlock = {
-    param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameters)
+    param(
+        $commandName,
+        $parameterName,
+        $wordToComplete,
+        $commandAst,
+        $fakeBoundParameters
+    )
 
     # Dynamically generate routes array
     if ($FakeBoundParameters.ComputerName) {
@@ -23,14 +29,23 @@ $ArgumentCompleterBlock = {
     }
     # Return routes as arguments (Intellisense)
     $routes | ForEach-Object {
-        New-Object -Type System.Management.Automation.CompletionResult -ArgumentList $_.Name,
-            #"$($_.ComputerName)_$($_.Name)",
-            "$(if ($_.ComputerName){"ComputerName: '$($_.ComputerName)' - RouteName: '$($_.Name)'"}else{$_.Name})",
-            "ParameterValue",
-            "$(if ($_.ComputerName){"ComputerName: '$($_.ComputerName)' - "})Network: '$($_.Network)' - Status: '$($_.Status)'"
+        New-Object -Type System.Management.Automation.CompletionResult -ArgumentList
+        $_.Name,
+        #"$($_.ComputerName)_$($_.Name)",
+        "$(if ($_.ComputerName){"ComputerName: '$($_.ComputerName)' - RouteName: '$($_.Name)'"}else{$_.Name})",
+        "ParameterValue",
+        "$(if ($_.ComputerName){"ComputerName: '$($_.ComputerName)' - "})Network: '$($_.Network)' - Status: '$($_.Status)'"
     }
+    # To review (to avoid syntax error)
+    $commandName | Out-Null
+    $parameterName | Out-Null
+    $wordToComplete | Out-Null
+    $commandAst | Out-Null
 }
-Register-ArgumentCompleter -CommandName Start-WinBGPRoute,Stop-WinBGPRoute,Start-WinBGPRouteMaintenance,Stop-WinBGPRouteMaintenance -ParameterName RouteName -ScriptBlock $ArgumentCompleterBlock
+Register-ArgumentCompleter `
+    -CommandName Start-WinBGPRoute, Stop-WinBGPRoute, Start-WinBGPRouteMaintenance, Stop-WinBGPRouteMaintenance `
+    -ParameterName RouteName `
+    -ScriptBlock $ArgumentCompleterBlock
 
 # Declare a module-level variable
 $PSWinBGP = [ordered]@{

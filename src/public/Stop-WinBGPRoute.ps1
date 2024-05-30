@@ -11,14 +11,14 @@ function Stop-WinBGPRoute() {
             # Get WinBGP route
     #>
 
-    [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Medium')]
+    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'Medium')]
     Param(
-        [Parameter(Mandatory=$false)]
-        [String[]]$ComputerName='local',
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $false)]
+        [String[]]$ComputerName = 'local',
+        [Parameter(Mandatory = $true)]
         [String]$RouteName
     )
-    if ($pscmdlet.ShouldProcess($RouteName,'Stop route')) {
+    if ($pscmdlet.ShouldProcess($RouteName, 'Stop route')) {
         Invoke-PSWinBGP -ComputerName $ComputerName -call 'stoproute' -routename $RouteName
     }
 }

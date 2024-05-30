@@ -11,8 +11,8 @@ function Get-WinBGPRoute() {
     #>
 
     Param(
-        [Parameter(Mandatory=$false)]
-        [String[]]$ComputerName='local'
+        [Parameter(Mandatory = $false)]
+        [String[]]$ComputerName = 'local'
     )
 
     Invoke-PSWinBGP -ComputerName $ComputerName -Call 'routes'

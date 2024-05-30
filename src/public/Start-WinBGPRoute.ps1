@@ -11,15 +11,15 @@ function Start-WinBGPRoute() {
             # Get WinBGP route
     #>
 
-    [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Medium')]
+    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'Medium')]
     Param(
-        [Parameter(Mandatory=$false)]
-        [String[]]$ComputerName='local',
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $false)]
+        [String[]]$ComputerName = 'local',
+        [Parameter(Mandatory = $true)]
         [String]$RouteName
     )
     # If action is confirmed
-    if ($pscmdlet.ShouldProcess($RouteName,'Start route')) {
+    if ($pscmdlet.ShouldProcess($RouteName, 'Start route')) {
         Invoke-PSWinBGP -ComputerName $ComputerName -call 'startroute' -RouteName $RouteName
     }
 }
