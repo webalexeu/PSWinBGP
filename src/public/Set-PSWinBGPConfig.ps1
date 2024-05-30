@@ -7,23 +7,22 @@ function Set-PSWinBGPConfig {
         Set PSWinBBGP module configuration, and $PSWinBBGP module variable.
 
     .PARAMETER ApiPort
-        Api Port (Default: 8888)
+        API Port (Default: 8888)
 
     .PARAMETER ApiProtocol
-        Api Protocol (Default: https)
+        API Protocol (Default: HTTPS)
 
     .PARAMETER ApiTimeout
-        Api Timeout (Default: 10s)
+        API Timeout (Default: 10s)
 
     .PARAMETER LocalhostApiPort
-        Localhost Api Port (Default: 8888)
+        Localhost API Port (Default: 8888)
 
     .PARAMETER LocalhostApiProtocol
-        Localhost Api Protocol (Default: http)
+        Localhost API Protocol (Default: HTTP)
 
     .PARAMETER LocalhostApiTimeout
-        Localhost Api Timeout (Default: 5s)
-
+        Localhost API Timeout (Default: 5s)
     #>
     [CmdletBinding(SupportsShouldProcess = $true)]
     param(
@@ -36,7 +35,7 @@ function Set-PSWinBGPConfig {
     )
 
     if ($pscmdlet.ShouldProcess('$Script:PSWinBGP', 'Set config')) {
-        Switch ($PSBoundParameters.Keys) {
+        switch ($PSBoundParameters.Keys) {
             'ApiPort' { $Script:PSWinBGP.ApiPort = $ApiPort }
             'ApiProtocol' { $Script:PSWinBGP.ApiProtocol = $ApiProtocol }
             'ApiTimeout' { $Script:PSWinBGP.ApiTimeout = $ApiTimeout }

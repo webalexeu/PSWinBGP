@@ -28,7 +28,7 @@
     CompanyName          = 'Webalex System'
 
     # Copyright statement for this module
-    Copyright            = '(c) webalexeu. All rights reserved.'
+    # Copyright            = '(c) author. All rights reserved.'
 
     # Description of the functionality provided by this module
     Description          = 'WinBGP Remote Management'

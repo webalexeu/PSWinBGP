@@ -1,18 +1,19 @@
 function Stop-WinBGPRouteMaintenance() {
     <#
         .SYNOPSIS
-            WinBGP Remote Management - Route
+            WinBGP Remote Management - Stop Route Maintenance
         .DESCRIPTION
-            WinBGP Remote Management
+            This function perform Stop Route Maintenance
         .PARAMETER ComputerName
             Single or multiple ComputerName (Default: localhost)
+        .PARAMETER RouteName
+            RouteName (Currently supporting only one route, IntelliSense availalble)
         .EXAMPLE
-            Get-WinBGPRoute -ComputerName machine1,machine2
-            # Get WinBGP route
+            Stop-WinBGPRouteMaintenance -ComputerName machine1,machine2 -RouteName route1.contoso.com
     #>
 
     [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'Medium')]
-    Param(
+    param(
         [Parameter(Mandatory = $false)]
         [String[]]$ComputerName = 'local',
         [Parameter(Mandatory = $true)]

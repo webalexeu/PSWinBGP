@@ -27,7 +27,7 @@ $ArgumentCompleterBlock = {
     } else {
         [Array] $routes = (Get-WinBGPRoute)
     }
-    # Return routes as arguments (Intellisense)
+    # Return routes as arguments (IntelliSense)
     $routes | ForEach-Object {
         New-Object -Type System.Management.Automation.CompletionResult -ArgumentList
         $_.Name,
@@ -37,10 +37,10 @@ $ArgumentCompleterBlock = {
         "$(if ($_.ComputerName){"ComputerName: '$($_.ComputerName)' - "})Network: '$($_.Network)' - Status: '$($_.Status)'"
     }
     # To review (to avoid syntax error)
-    $commandName | Out-Null
-    $parameterName | Out-Null
-    $wordToComplete | Out-Null
-    $commandAst | Out-Null
+    $null = $commandName
+    $null = $parameterName
+    $null = $wordToComplete
+    $null = $commandAst
 }
 Register-ArgumentCompleter `
     -CommandName Start-WinBGPRoute, Stop-WinBGPRoute, Start-WinBGPRouteMaintenance, Stop-WinBGPRouteMaintenance `

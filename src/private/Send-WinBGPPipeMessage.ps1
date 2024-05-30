@@ -1,4 +1,4 @@
-Function Send-WinBGPPipeMessage() {
+function Send-WinBGPPipeMessage() {
     <#
         .SYNOPSIS
             Send-WinBGPPipeMessage
@@ -11,7 +11,9 @@ Function Send-WinBGPPipeMessage() {
         .EXAMPLE
             Send-WinBGPPipeMessage -PipeName $pipeName -Message $Message
     #>
-    Param(
+
+    [CmdletBinding()]
+    param(
         [Parameter(Mandatory = $true)]
         [String]$PipeName,
         [Parameter(Mandatory = $true)]

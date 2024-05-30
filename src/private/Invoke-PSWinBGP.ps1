@@ -11,7 +11,8 @@ function Invoke-PSWinBGP() {
             # Get WinBGP status (Display WinBGP routes status)
     #>
 
-    Param(
+    [CmdletBinding()]
+    param(
         [Parameter(Mandatory = $true)]
         [String[]]$ComputerName,
         [Parameter(ParameterSetName = 'call', Mandatory = $true)]
@@ -45,7 +46,7 @@ function Invoke-PSWinBGP() {
         # Initialize error variable
         $ErrorCount = 0
 
-        ForEach ($Computer in $ComputerName) {
+        foreach ($Computer in $ComputerName) {
             # Initialize output variable
             $ApiOutput = [PSCustomObject]@{}
             $ErrorOut = [PSCustomObject]@{}
@@ -99,9 +100,9 @@ function Invoke-PSWinBGP() {
                     $RestApiCall = Invoke-RestMethod @params
                 } else {
                     # Try/catch because PS5 don't support status code and skip http error check
-                    Try {
+                    try {
                         $RestApiCall = Invoke-RestMethod @params
-                    } Catch {
+                    } catch {
                         $ErrorOut | Add-member -MemberType NoteProperty -Name 'Result' -Value "API call error: $($_)"
                         $ErrorCount++
                     }

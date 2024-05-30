@@ -13,6 +13,8 @@ function Send-WinBGPRouteControl() {
         .EXAMPLE
             Send-WinBGPRouteControl -RouteName $RouteName -Control 'start' -Action 'maintenance'
     #>
+
+    [CmdletBinding()]
     param (
         [Parameter(Mandatory = $false)]
         [String]$Action = 'route',
@@ -32,9 +34,9 @@ function Send-WinBGPRouteControl() {
         $PipeStatus = ($_).ToString()
     }
     if ($PipeStatus -like "*Pipe hasn't been connected yet*") {
-        return "WinBGP not ready"
+        Write-Output "WinBGP not ready"
     } else {
         # TO BE IMPROVED to get status
-        return "Success"
+        Write-Output "Success"
     }
 }

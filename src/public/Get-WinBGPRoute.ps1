@@ -1,7 +1,7 @@
 function Get-WinBGPRoute() {
     <#
         .SYNOPSIS
-            Get WinBGP Route
+            WinBGP Remote Management - Get WinBGP Route
         .DESCRIPTION
             This function retrieve WinBGP Routes
         .PARAMETER ComputerName
@@ -10,7 +10,8 @@ function Get-WinBGPRoute() {
             Get-WinBGPRoute -ComputerName machine1,machine2
     #>
 
-    Param(
+    [CmdletBinding()]
+    param(
         [Parameter(Mandatory = $false)]
         [String[]]$ComputerName = 'local'
     )
