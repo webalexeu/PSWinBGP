@@ -1,7 +1,8 @@
-# Dot source public/private functions
+# Dot source init/public/private functions
+$init = @(Get-ChildItem -Path (Join-Path -Path $PSScriptRoot -ChildPath 'Init/*.ps1') -Recurse -ErrorAction Stop)
 $public = @(Get-ChildItem -Path (Join-Path -Path $PSScriptRoot -ChildPath 'Public/*.ps1') -Recurse -ErrorAction Stop)
 $private = @(Get-ChildItem -Path (Join-Path -Path $PSScriptRoot -ChildPath 'Private/*.ps1') -Recurse -ErrorAction Stop)
-foreach ($import in @($public + $private)) {
+foreach ($import in @($init + $public + $private)) {
     try {
         . $import.FullName
     } catch {
@@ -11,43 +12,7 @@ foreach ($import in @($public + $private)) {
 
 Export-ModuleMember -Function $public.Basename
 
-# Route Argument Completer
-$ArgumentCompleterBlock = {
-    param(
-        $commandName,
-        $parameterName,
-        $wordToComplete,
-        $commandAst,
-        $fakeBoundParameters
-    )
-
-    # Dynamically generate routes array
-    if ($FakeBoundParameters.ComputerName) {
-        [Array] $routes = (Get-WinBGPRoute -ComputerName $FakeBoundParameters.ComputerName)
-    } else {
-        [Array] $routes = (Get-WinBGPRoute)
-    }
-    # Return routes as arguments (IntelliSense)
-    $routes | ForEach-Object {
-        New-Object -Type System.Management.Automation.CompletionResult -ArgumentList
-        $_.Name,
-        #"$($_.ComputerName)_$($_.Name)",
-        "$(if ($_.ComputerName){"ComputerName: '$($_.ComputerName)' - RouteName: '$($_.Name)'"}else{$_.Name})",
-        "ParameterValue",
-        "$(if ($_.ComputerName){"ComputerName: '$($_.ComputerName)' - "})Network: '$($_.Network)' - Status: '$($_.Status)'"
-    }
-    # To review (to avoid syntax error)
-    $null = $commandName
-    $null = $parameterName
-    $null = $wordToComplete
-    $null = $commandAst
-}
-Register-ArgumentCompleter `
-    -CommandName Start-WinBGPRoute, Stop-WinBGPRoute, Start-WinBGPRouteMaintenance, Stop-WinBGPRouteMaintenance `
-    -ParameterName RouteName `
-    -ScriptBlock $ArgumentCompleterBlock
-
-# Declare a module-level variable
+# Declare a module-level variable (TO REVIEW, it's now part of data folder)
 $PSWinBGP = [ordered]@{
     LocalhostApiPort     = 8888
     LocalhostApiProtocol = 'http'
