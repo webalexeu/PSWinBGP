@@ -1,7 +1,8 @@
-# Dot source public/private functions
+# Dot source init/public/private functions
+$init = @(Get-ChildItem -Path (Join-Path -Path $PSScriptRoot -ChildPath 'Init/*.ps1') -Recurse -ErrorAction Stop)
 $public = @(Get-ChildItem -Path (Join-Path -Path $PSScriptRoot -ChildPath 'Public/*.ps1') -Recurse -ErrorAction Stop)
 $private = @(Get-ChildItem -Path (Join-Path -Path $PSScriptRoot -ChildPath 'Private/*.ps1') -Recurse -ErrorAction Stop)
-foreach ($import in @($public + $private)) {
+foreach ($import in @($init + $public + $private)) {
     try {
         . $import.FullName
     } catch {
@@ -9,52 +10,14 @@ foreach ($import in @($public + $private)) {
     }
 }
 
+#region - Data import
+Write-Verbose "[$scriptName] - [data] - Processing folder"
+$dataFolder = (Join-Path $PSScriptRoot 'data')
+Write-Verbose "[$scriptName] - [data] - [$dataFolder]"
+Get-ChildItem -Path "$dataFolder" -Recurse -Force -Include '*.psd1' -ErrorAction SilentlyContinue | ForEach-Object {
+    Write-Verbose "[$scriptName] - [data] - [$($_.BaseName)] - Importing"
+    New-Variable -Name $_.BaseName -Value (Import-PowerShellDataFile -Path $_.FullName) -Force
+    Write-Verbose "[$scriptName] - [data] - [$($_.BaseName)] - Done"
+}
+
 Export-ModuleMember -Function $public.Basename
-
-# Route Argument Completer
-$ArgumentCompleterBlock = {
-    param(
-        $commandName,
-        $parameterName,
-        $wordToComplete,
-        $commandAst,
-        $fakeBoundParameters
-    )
-
-    # Dynamically generate routes array
-    if ($FakeBoundParameters.ComputerName) {
-        [Array] $routes = (Get-WinBGPRoute -ComputerName $FakeBoundParameters.ComputerName)
-    } else {
-        [Array] $routes = (Get-WinBGPRoute)
-    }
-    # Return routes as arguments (IntelliSense)
-    $routes | ForEach-Object {
-        New-Object -Type System.Management.Automation.CompletionResult -ArgumentList
-        $_.Name,
-        #"$($_.ComputerName)_$($_.Name)",
-        "$(if ($_.ComputerName){"ComputerName: '$($_.ComputerName)' - RouteName: '$($_.Name)'"}else{$_.Name})",
-        "ParameterValue",
-        "$(if ($_.ComputerName){"ComputerName: '$($_.ComputerName)' - "})Network: '$($_.Network)' - Status: '$($_.Status)'"
-    }
-    # To review (to avoid syntax error)
-    $null = $commandName
-    $null = $parameterName
-    $null = $wordToComplete
-    $null = $commandAst
-}
-Register-ArgumentCompleter `
-    -CommandName Start-WinBGPRoute, Stop-WinBGPRoute, Start-WinBGPRouteMaintenance, Stop-WinBGPRouteMaintenance `
-    -ParameterName RouteName `
-    -ScriptBlock $ArgumentCompleterBlock
-
-# Declare a module-level variable
-$PSWinBGP = [ordered]@{
-    LocalhostApiPort     = 8888
-    LocalhostApiProtocol = 'http'
-    LocalhostApiTimeout  = 5
-    ApiPort              = 8888
-    ApiProtocol          = 'https'
-    ApiTimeout           = 10
-}
-New-Variable -Name PSWinBGP -Value $PSWinBGP -Scope Script -Force
-
