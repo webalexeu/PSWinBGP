@@ -12,14 +12,13 @@ foreach ($import in @($init + $public + $private)) {
 
 Export-ModuleMember -Function $public.Basename
 
-# Declare a module-level variable (TO REVIEW, it's now part of data folder)
-$PSWinBGP = [ordered]@{
-    LocalhostApiPort     = 8888
-    LocalhostApiProtocol = 'http'
-    LocalhostApiTimeout  = 5
-    ApiPort              = 8888
-    ApiProtocol          = 'https'
-    ApiTimeout           = 10
-}
-New-Variable -Name PSWinBGP -Value $PSWinBGP -Scope Script -Force
 
+#region - Data import
+Write-Verbose "[$scriptName] - [data] - Processing folder"
+$dataFolder = (Join-Path $PSScriptRoot 'data')
+Write-Verbose "[$scriptName] - [data] - [$dataFolder]"
+Get-ChildItem -Path "$dataFolder" -Recurse -Force -Include '*.psd1' -ErrorAction SilentlyContinue | ForEach-Object {
+    Write-Verbose "[$scriptName] - [data] - [$($_.BaseName)] - Importing"
+    New-Variable -Name $_.BaseName -Value (Import-PowerShellDataFile -Path $_.FullName) -Force
+    Write-Verbose "[$scriptName] - [data] - [$($_.BaseName)] - Done"
+}
