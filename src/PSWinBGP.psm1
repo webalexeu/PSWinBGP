@@ -10,6 +10,9 @@ foreach ($import in @($init + $public + $private)) {
     }
 }
 
+Export-ModuleMember -Function $public.Basename
+
+
 #region - Data import
 Write-Verbose "[$scriptName] - [data] - Processing folder"
 $dataFolder = (Join-Path $PSScriptRoot 'data')
@@ -19,5 +22,3 @@ Get-ChildItem -Path "$dataFolder" -Recurse -Force -Include '*.psd1' -ErrorAction
     New-Variable -Name $_.BaseName -Value (Import-PowerShellDataFile -Path $_.FullName) -Force
     Write-Verbose "[$scriptName] - [data] - [$($_.BaseName)] - Done"
 }
-
-Export-ModuleMember -Function $public.Basename
