@@ -34,12 +34,10 @@ function Invoke-PSWinBGP() {
             [Int]$Port = $Script:PSWinBGP.LocalhostApiPort
             [String]$Protocol = $Script:PSWinBGP.LocalhostApiProtocol
             [Int]$Timeout = $Script:PSWinBGP.LocalhostApiTimeout
-            [Int]$AuthenticationMethod = $Script:PSWinBGP.LocalhostAuthenticationMethod
         } else {
             [Int]$Port = $Script:PSWinBGP.ApiPort
             [String]$Protocol = $Script:PSWinBGP.ApiProtocol
             [Int]$Timeout = $Script:PSWinBGP.ApiTimeout
-            [Int]$AuthenticationMethod = $Script:PSWinBGP.AuthenticationMethod
         }
 
         # Initialize output variable
@@ -57,10 +55,7 @@ function Invoke-PSWinBGP() {
             $params.add('UseBasicParsing', $true)
             $params.add('TimeoutSec', $Timeout)
             $params.add('ContentType', 'application/json')
-            # Only authentication method managed currently is 'Negotiate' (To be improved)
-            if (($AuthenticationMethod -eq 'IntegratedWindowsAuthentication') -or ($AuthenticationMethod -eq 'Negotiate')) {
-                $params.add('UseDefaultCredentials', $true)
-            }
+            $params.add('UseDefaultCredentials', $true)
 
             # Get
             if ($call -eq 'routes') {
