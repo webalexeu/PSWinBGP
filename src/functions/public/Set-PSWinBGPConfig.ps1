@@ -48,7 +48,7 @@ function Set-PSWinBGPConfig {
             'ApiPort' { $Script:PSWinBGP.ApiPort = $ApiPort }
             'ApiProtocol' { $Script:PSWinBGP.ApiProtocol = $ApiProtocol }
             'ApiTimeout' { $Script:PSWinBGP.ApiTimeout = $ApiTimeout }
-            'LocalhostApiAuthenticationMethod'{ $Script:PSWinBGP.LocalhostApiAuthenticationMethod = $LocalhostApiAuthenticationMethod }
+            'LocalhostApiAuthenticationMethod' { $Script:PSWinBGP.LocalhostApiAuthenticationMethod = $LocalhostApiAuthenticationMethod }
             'LocalhostApiPort' { $Script:PSWinBGP.LocalhostApiPort = $LocalhostApiPort }
             'LocalhostApiProtocol' { $Script:PSWinBGP.LocalhostApiProtocol = $LocalhostApiProtocol }
             'LocalhostApiTimeout' { $Script:PSWinBGP.LocalhostApiTimeout = $LocalhostApiTimeout }
