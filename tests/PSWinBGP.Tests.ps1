@@ -14,4 +14,7 @@
     It 'Function: Stop-WinBGPRouteMaintenance' {
         Stop-WinBGPRouteMaintenance -ComputerName localhost -RouteName 'winbgp.contoso.com' | Should -Be "@{Result=API connection timeout}"
     }
+    It 'Function: Set-PSWinBGPConfig' {
+        Set-PSWinBGPConfig | Should -Be "@{Result=API connection timeout}" | Should -BeNullOrEmpty
+    }
 }
