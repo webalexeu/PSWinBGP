@@ -1,10 +1,10 @@
 @{
-    LocalhostApiPort              = 8888
-    LocalhostApiProtocol          = 'http'
-    LocalhostApiTimeout           = 5
-    LocalhostAuthenticationMethod = 'Anonymous'
-    ApiPort                       = 8888
-    ApiProtocol                   = 'https'
-    ApiTimeout                    = 10
-    AuthenticationMethod          = 'IntegratedWindowsAuthentication'
+    LocalhostApiAuthenticationMethod = 'Anonymous'
+    LocalhostApiPort                 = 8888
+    LocalhostApiProtocol             = 'http'
+    LocalhostApiTimeout              = 5
+    ApiAuthenticationMethod          = 'IntegratedWindowsAuthentication'
+    ApiPort                          = 8888
+    ApiProtocol                      = 'https'
+    ApiTimeout                       = 10
 }
