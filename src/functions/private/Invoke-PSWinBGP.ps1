@@ -31,15 +31,15 @@ function Invoke-PSWinBGP() {
         }
     } else {
         if ($ComputerName -eq 'localhost') {
+            [String]$AuthenticationMethod = $Script:PSWinBGP.LocalhostApiAuthenticationMethod
             [Int]$Port = $Script:PSWinBGP.LocalhostApiPort
             [String]$Protocol = $Script:PSWinBGP.LocalhostApiProtocol
             [Int]$Timeout = $Script:PSWinBGP.LocalhostApiTimeout
-            [String]$AuthenticationMethod = $Script:PSWinBGP.LocalhostAuthenticationMethod
         } else {
+            [String]$AuthenticationMethod = $Script:PSWinBGP.ApiAuthenticationMethod
             [Int]$Port = $Script:PSWinBGP.ApiPort
             [String]$Protocol = $Script:PSWinBGP.ApiProtocol
             [Int]$Timeout = $Script:PSWinBGP.ApiTimeout
-            [String]$AuthenticationMethod = $Script:PSWinBGP.AuthenticationMethod
         }
 
         # Initialize output variable
