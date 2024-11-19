@@ -1,4 +1,4 @@
-@{
+$script:PSWinBGP = @{
     LocalhostApiAuthenticationMethod = 'Anonymous'
     LocalhostApiPort                 = 8888
     LocalhostApiProtocol             = 'http'
