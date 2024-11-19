@@ -20,7 +20,7 @@ function Stop-WinBGPRouteMaintenance() {
         [Alias('RouteName')]
         [String[]]$Name
     )
-    Process {
+    process {
         # Parsing all routes provided
         foreach ($Route in $Name) {
             # If action is confirmed
