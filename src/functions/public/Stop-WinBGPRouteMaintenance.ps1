@@ -24,7 +24,16 @@ function Stop-WinBGPRouteMaintenance() {
         # Parsing all routes provided
         foreach ($Route in $Name) {
             # If action is confirmed
-            if ($PSCmdlet.ShouldProcess("$($Route)$(if ($ComputerName -ne 'local'){" [ComputerName: $($ComputerName)]"})", 'Stop WinBGP route maintenance')) {
+            if (
+                $PSCmdlet.ShouldProcess(
+                    "$($Route)$(
+                        if ($ComputerName -ne 'local') {
+                            " [ComputerName: $($ComputerName)]"
+                        }
+                    )",
+                    'Stop WinBGP route maintenance'
+                )
+            ) {
                 Invoke-PSWinBGP -ComputerName $ComputerName -call 'stopmaintenance' -RouteName $Route
             }
         }

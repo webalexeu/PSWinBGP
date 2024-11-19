@@ -91,8 +91,7 @@ function Invoke-PSWinBGP() {
                 if ($ComputerName -eq 'localhost') {
                     # Bypass connectivity test when localhost (For speed performance)
                     $ConnectivityTest = $true
-                }
-                else {
+                } else {
                     $ConnectivityTest = (Test-NetConnection -ComputerName $computer -Port $port).TcpTestSucceeded
                 }
             }
@@ -108,8 +107,7 @@ function Invoke-PSWinBGP() {
                     # Try/catch because PS5 don't support status code and skip http error check
                     try {
                         $RestApiCall = Invoke-RestMethod @params
-                    }
-                    catch {
+                    } catch {
                         $ErrorOut | Add-member -MemberType NoteProperty -Name 'Result' -Value "API call error: $($_)"
                         $ErrorCount++
                     }
@@ -123,8 +121,7 @@ function Invoke-PSWinBGP() {
                         $Value = "API return code: $([System.Net.HttpStatusCode]$StatusCode) ($StatusCode)"
                         $ErrorOut | Add-Member -MemberType NoteProperty -Name 'Result' -Value $Value
                         $ErrorCount++
-                    }
-                    else {
+                    } else {
                         if ($PSVersionTable.PSVersion.Major -ge 7) {
                             $ErrorOut | Add-member -MemberType NoteProperty -Name 'Result' -Value 'API call timeout'
                             $ErrorCount++
