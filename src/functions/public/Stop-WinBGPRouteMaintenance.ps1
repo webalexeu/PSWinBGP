@@ -14,9 +14,9 @@ function Stop-WinBGPRouteMaintenance() {
 
     [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'Medium')]
     param(
-        [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName=$true)]
+        [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true)]
         [String[]]$ComputerName = 'local',
-        [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
         [Alias('RouteName')]
         [String[]]$Name
     )
@@ -24,7 +24,7 @@ function Stop-WinBGPRouteMaintenance() {
     # Parsing all routes provided
     foreach ($Route in $Name) {
         # If action is confirmed
-        if ($PSCmdlet.ShouldProcess("$($Route)$(if ($ComputerName -ne 'local'){" [ComputerName: $($ComputerName)]"})",'Stop WinBGP route maintenance')) {
+        if ($PSCmdlet.ShouldProcess("$($Route)$(if ($ComputerName -ne 'local'){" [ComputerName: $($ComputerName)]"})", 'Stop WinBGP route maintenance')) {
             Invoke-PSWinBGP -ComputerName $ComputerName -call 'stopmaintenance' -RouteName $Route
         }
     }

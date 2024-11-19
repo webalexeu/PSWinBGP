@@ -30,12 +30,14 @@ function Send-WinBGPRouteControl() {
         $pipeName = 'Service_WinBGP'
         $Message = "$($Action) $($RouteName) $($Control)"
         Send-WinBGPPipeMessage -PipeName $pipeName -Message $Message
-    } catch {
+    }
+    catch {
         $PipeStatus = ($_).ToString()
     }
     if ($PipeStatus -like "*Pipe hasn't been connected yet*") {
         Write-Output "WinBGP not ready"
-    } else {
+    }
+    else {
         # TO BE IMPROVED to get status
         Write-Output "Success"
     }

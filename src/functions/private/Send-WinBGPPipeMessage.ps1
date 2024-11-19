@@ -33,9 +33,11 @@ function Send-WinBGPPipeMessage() {
         }
         $sw.AutoFlush = $true
         $sw.WriteLine($Message)
-    } catch {
+    }
+    catch {
         Write-Log "Error sending pipe $pipeName message: $_" -Level Error
-    } finally {
+    }
+    finally {
         if ($sw) {
             $sw.Dispose() # Release resources
             $sw = $null   # Force the PowerShell garbage collector to delete the .net object

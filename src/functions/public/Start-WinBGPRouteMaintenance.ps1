@@ -14,17 +14,17 @@ function Start-WinBGPRouteMaintenance() {
 
     [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'Medium')]
     param(
-        [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName=$true)]
+        [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true)]
         [String[]]$ComputerName = 'local',
-        [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
-        [Alias('RouteName')] 
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('RouteName')]
         [String[]]$Name
     )
 
     # Parsing all routes provided
     foreach ($Route in $Name) {
         # If action is confirmed
-        if ($PSCmdlet.ShouldProcess("$($Route)$(if ($ComputerName -ne 'local'){" [ComputerName: $($ComputerName)]"})",'Start WinBGP route maintenance')) {
+        if ($PSCmdlet.ShouldProcess("$($Route)$(if ($ComputerName -ne 'local'){" [ComputerName: $($ComputerName)]"})", 'Start WinBGP route maintenance')) {
             Invoke-PSWinBGP -ComputerName $ComputerName -call 'startmaintenance' -RouteName $Route
         }
     }

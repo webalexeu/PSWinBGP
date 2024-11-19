@@ -14,18 +14,19 @@ function Get-WinBGPRoute() {
 
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName=$true)]
+        [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true)]
         [String[]]$ComputerName = 'local',
-        [Parameter(Mandatory=$false)]
+        [Parameter(Mandatory = $false)]
         [Alias('RouteName')]
         [String[]]$Name
     )
 
-    $Routes=Invoke-PSWinBGP -ComputerName $ComputerName -Call 'routes'
+    $Routes = Invoke-PSWinBGP -ComputerName $ComputerName -Call 'routes'
     # Filter if Name is provided
     if ($Name) {
         $Routes | Where-Object { $_.Name -in $Name }
-    } else {
+    }
+    else {
         $Routes
     }
 }
