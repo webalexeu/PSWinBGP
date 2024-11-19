@@ -36,8 +36,7 @@ function Send-WinBGPRouteControl() {
     }
     if ($PipeStatus -like "*Pipe hasn't been connected yet*") {
         Write-Output "WinBGP not ready"
-    }
-    else {
+    } else {
         # TO BE IMPROVED to get status
         Write-Output "Success"
     }

@@ -29,15 +29,13 @@ function Invoke-PSWinBGP() {
             'startmaintenance' { Send-WinBGPRouteControl -RouteName $RouteName -Control 'start' -Action 'maintenance' }
             'stopmaintenance' { Send-WinBGPRouteControl -RouteName $RouteName -Control 'stop' -Action 'maintenance' }
         }
-    }
-    else {
+    } else {
         if ($ComputerName -eq 'localhost') {
             [String]$AuthenticationMethod = $Script:PSWinBGP.LocalhostApiAuthenticationMethod
             [Int]$Port = $Script:PSWinBGP.LocalhostApiPort
             [String]$Protocol = $Script:PSWinBGP.LocalhostApiProtocol
             [Int]$Timeout = $Script:PSWinBGP.LocalhostApiTimeout
-        }
-        else {
+        } else {
             [String]$AuthenticationMethod = $Script:PSWinBGP.ApiAuthenticationMethod
             [Int]$Port = $Script:PSWinBGP.ApiPort
             [String]$Protocol = $Script:PSWinBGP.ApiProtocol
@@ -89,8 +87,7 @@ function Invoke-PSWinBGP() {
                 $ConnectivityTest = (Test-Connection -TcpPort $Port -TimeoutSeconds $Timeout -TargetName $Computer -Quiet)
                 $params.add('SkipHttpErrorCheck', $true)
                 $params.add('StatusCodeVariable', 'StatusCode')
-            }
-            else {
+            } else {
                 if ($ComputerName -eq 'localhost') {
                     # Bypass connectivity test when localhost (For speed performance)
                     $ConnectivityTest = $true
@@ -107,8 +104,7 @@ function Invoke-PSWinBGP() {
                 # Perform Rest API Call
                 if ($PSVersionTable.PSVersion.Major -ge 7) {
                     $RestApiCall = Invoke-RestMethod @params
-                }
-                else {
+                } else {
                     # Try/catch because PS5 don't support status code and skip http error check
                     try {
                         $RestApiCall = Invoke-RestMethod @params
@@ -122,8 +118,7 @@ function Invoke-PSWinBGP() {
                 if ($RestApiCall) {
                     $ApiOutput = $RestApiCall
                     $ErrorOut | Add-member -MemberType NoteProperty -Name 'Result' -Value 'API connection OK'
-                }
-                else {
+                } else {
                     if ($StatusCode) {
                         $Value = "API return code: $([System.Net.HttpStatusCode]$StatusCode) ($StatusCode)"
                         $ErrorOut | Add-Member -MemberType NoteProperty -Name 'Result' -Value $Value
@@ -136,8 +131,7 @@ function Invoke-PSWinBGP() {
                         }
                     }
                 }
-            }
-            else {
+            } else {
                 $ErrorOut | Add-member -MemberType NoteProperty -Name 'Result' -Value 'API connection timeout'
                 $ErrorCount++
             }
@@ -157,8 +151,7 @@ function Invoke-PSWinBGP() {
         if ($ErrorCount -eq 0) {
             # Return result
             return [PSCustomObject]$Output
-        }
-        else {
+        } else {
             return [PSCustomObject]$ErrorOutput
         }
     }

@@ -25,8 +25,7 @@ function Get-WinBGPRoute() {
         # Filter if Name is provided
         if ($Name) {
             $Routes | Where-Object { $_.Name -in $Name }
-        }
-        else {
+        } else {
             $Routes
         }
     }

@@ -9,8 +9,7 @@ Register-ArgumentCompleter `
     # Dynamically generate routes array
     if ($FakeBoundParameters.ComputerName) {
         [Array] $routes = (Get-WinBGPRoute -ComputerName $FakeBoundParameters.ComputerName)
-    }
-    else {
+    } else {
         [Array] $routes = (Get-WinBGPRoute)
     }
     # Return routes as arguments (IntelliSense)
