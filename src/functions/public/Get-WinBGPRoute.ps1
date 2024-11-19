@@ -20,13 +20,14 @@ function Get-WinBGPRoute() {
         [Alias('RouteName')]
         [String[]]$Name
     )
-
-    $Routes = Invoke-PSWinBGP -ComputerName $ComputerName -Call 'routes'
-    # Filter if Name is provided
-    if ($Name) {
-        $Routes | Where-Object { $_.Name -in $Name }
-    }
-    else {
-        $Routes
+    Process {
+        $Routes = Invoke-PSWinBGP -ComputerName $ComputerName -Call 'routes'
+        # Filter if Name is provided
+        if ($Name) {
+            $Routes | Where-Object { $_.Name -in $Name }
+        }
+        else {
+            $Routes
+        }
     }
 }

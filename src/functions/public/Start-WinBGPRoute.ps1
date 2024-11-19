@@ -20,12 +20,13 @@ function Start-WinBGPRoute() {
         [Alias('RouteName')]
         [String[]]$Name
     )
-
-    # Parsing all routes provided
-    foreach ($Route in $Name) {
-        # If action is confirmed
-        if ($PSCmdlet.ShouldProcess("$($Route)$(if ($ComputerName -ne 'local'){" [ComputerName: $($ComputerName)]"})", 'Start WinBGP route')) {
-            Invoke-PSWinBGP -ComputerName $ComputerName -call 'startroute' -RouteName $Route
+    Process {
+        # Parsing all routes provided
+        foreach ($Route in $Name) {
+            # If action is confirmed
+            if ($PSCmdlet.ShouldProcess("$($Route)$(if ($ComputerName -ne 'local'){" [ComputerName: $($ComputerName)]"})", 'Start WinBGP route')) {
+                Invoke-PSWinBGP -ComputerName $ComputerName -call 'startroute' -RouteName $Route
+            }
         }
     }
 }
