@@ -7,7 +7,7 @@ function Start-WinBGPRouteMaintenance() {
         .PARAMETER ComputerName
             Single or multiple ComputerName (Default: localhost)
         .PARAMETER Name
-            Name (Currently supporting only one route, IntelliSense availalble)
+            Single or multiple Route Name (IntelliSense availalble)
         .EXAMPLE
             Start-WinBGPRouteMaintenance -ComputerName machine1,machine2 -Name route1.contoso.com
     #>
