@@ -1,6 +1,6 @@
 # Initializing PSWinBGP (Command completer is used by some public functions)
 Register-ArgumentCompleter `
-    -CommandName Start-WinBGPRoute, Stop-WinBGPRoute, Start-WinBGPRouteMaintenance, Stop-WinBGPRouteMaintenance `
+    -CommandName Get-WinBGPRoute, Start-WinBGPRoute, Stop-WinBGPRoute, Start-WinBGPRouteMaintenance, Stop-WinBGPRouteMaintenance `
     -ParameterName Name -ScriptBlock {
     param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameters)
     # Define paramaters to $null to avoid syntax errors
