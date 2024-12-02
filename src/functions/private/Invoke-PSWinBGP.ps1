@@ -3,7 +3,7 @@ function Invoke-PSWinBGP() {
         .SYNOPSIS
             Inkoke WinBGP
         .DESCRIPTION
-            Inkoke WinBGP using local method or API
+            Inkoke WinBGP using CLI for local call or API
         .PARAMETER ComputerName
             Single or multiple ComputerName (Default: localhost)
         .EXAMPLE
@@ -24,10 +24,10 @@ function Invoke-PSWinBGP() {
     if ($ComputerName -eq 'local') {
         switch ($call) {
             'routes' { Invoke-Command { WinBGP } }
-            'startroute' { Send-WinBGPRouteControl -RouteName $RouteName -Control 'start' }
-            'stoproute' { Send-WinBGPRouteControl -RouteName $RouteName -Control 'stop' }
-            'startmaintenance' { Send-WinBGPRouteControl -RouteName $RouteName -Control 'start' -Action 'maintenance' }
-            'stopmaintenance' { Send-WinBGPRouteControl -RouteName $RouteName -Control 'stop' -Action 'maintenance' }
+            'startroute' { Invoke-Command { WinBGP -RouteName $RouteName -StartRoute } }
+            'stoproute' { Invoke-Command { WinBGP -RouteName $RouteName -StopRoute } }
+            'startmaintenance' { Invoke-Command { WinBGP -RouteName $RouteName -StartMaintenance } }
+            'stopmaintenance' { Invoke-Command { WinBGP -RouteName $RouteName -StopMaintenance } }
         }
     } else {
         if ($ComputerName -eq 'localhost') {
