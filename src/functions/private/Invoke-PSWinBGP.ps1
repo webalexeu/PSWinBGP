@@ -28,6 +28,7 @@ function Invoke-PSWinBGP() {
             'stoproute' { Invoke-Command { WinBGP -RouteName $RouteName -StopRoute } }
             'startmaintenance' { Invoke-Command { WinBGP -RouteName $RouteName -StartMaintenance } }
             'stopmaintenance' { Invoke-Command { WinBGP -RouteName $RouteName -StopMaintenance } }
+            'logs' { Invoke-Command { WinBGP -Logs } }
         }
     } else {
         if ($ComputerName -eq 'localhost') {
