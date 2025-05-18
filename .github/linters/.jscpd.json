@@ -1,3 +1,10 @@
 {
-  "ignore": ["**/.github/**", "**/PSWinBGP/**"]
+    "threshold": 0,
+    "reporters": [
+        "consoleFull"
+    ],
+    "ignore": [
+        "**/tests/**"
+    ],
+    "absolute": true
 }
