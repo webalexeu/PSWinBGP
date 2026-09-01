@@ -10,6 +10,8 @@ function Start-WinBGPRouteMaintenance() {
             Single or multiple Route Name (IntelliSense available)
         .EXAMPLE
             Start-WinBGPRouteMaintenance -ComputerName machine1,machine2 -Name route1.contoso.com
+        .LINK
+            https://psmodule.io/PSWinBGP/Functions/Start-WinBGPRouteMaintenance/
     #>
 
     [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'Medium')]

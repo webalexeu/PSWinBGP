@@ -10,6 +10,8 @@ function Get-WinBGPRoute() {
             Single or multiple Route Name (IntelliSense available)
         .EXAMPLE
             Get-WinBGPRoute -ComputerName machine1,machine2
+        .LINK
+            https://psmodule.io/PSWinBGP/Functions/Get-WinBGPRoute/
     #>
 
     [CmdletBinding()]

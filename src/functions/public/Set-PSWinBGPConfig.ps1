@@ -29,6 +29,9 @@ function Set-PSWinBGPConfig {
 
     .PARAMETER LocalhostApiTimeout
         Localhost API Timeout (Default: 5s)
+
+    .LINK
+        https://psmodule.io/PSWinBGP/Functions/Set-PSWinBGPConfig/
     #>
     [CmdletBinding(SupportsShouldProcess = $true)]
     param(

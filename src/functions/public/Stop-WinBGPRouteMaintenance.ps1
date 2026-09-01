@@ -10,6 +10,8 @@ function Stop-WinBGPRouteMaintenance() {
             Single or multiple Route Name (IntelliSense available)
         .EXAMPLE
             Stop-WinBGPRouteMaintenance -ComputerName machine1,machine2 -Name route1.contoso.com
+        .LINK
+            https://psmodule.io/PSWinBGP/Functions/Stop-WinBGPRouteMaintenance/
     #>
 
     [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'Medium')]
