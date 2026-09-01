@@ -7,9 +7,11 @@ function Start-WinBGPRoute() {
         .PARAMETER ComputerName
             Single or multiple ComputerName (Default: localhost)
         .PARAMETER Name
-            Single or multiple Route Name (IntelliSense availalble)
+            Single or multiple Route Name (IntelliSense available)
         .EXAMPLE
             Start-WinBGPRoute -ComputerName machine1,machine2 -Name route1.contoso.com
+        .LINK
+            https://psmodule.io/PSWinBGP/Functions/Start-WinBGPRoute/
     #>
 
     [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]

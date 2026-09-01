@@ -7,9 +7,11 @@ function Stop-WinBGPRoute() {
         .PARAMETER ComputerName
             Single or multiple ComputerName (Default: localhost)
         .PARAMETER Name
-            Single or multiple Route Name (IntelliSense availalble)
+            Single or multiple Route Name (IntelliSense available)
         .EXAMPLE
             Stop-WinBGPRoute -ComputerName machine1,machine2 -Name route1.contoso.com
+        .LINK
+            https://psmodule.io/PSWinBGP/Functions/Stop-WinBGPRoute/
     #>
 
     [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]

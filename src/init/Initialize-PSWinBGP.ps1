@@ -3,7 +3,7 @@ Register-ArgumentCompleter `
     -CommandName Get-WinBGPRoute, Start-WinBGPRoute, Stop-WinBGPRoute, Start-WinBGPRouteMaintenance, Stop-WinBGPRouteMaintenance `
     -ParameterName Name -ScriptBlock {
     param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameters)
-    # Define paramaters to $null to avoid syntax errors
+    # Define parameters to $null to avoid syntax errors
     $null = $commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameters
 
     # Dynamically generate routes array
