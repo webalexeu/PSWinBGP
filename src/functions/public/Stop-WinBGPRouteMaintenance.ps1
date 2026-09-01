@@ -7,7 +7,7 @@ function Stop-WinBGPRouteMaintenance() {
         .PARAMETER ComputerName
             Single or multiple ComputerName (Default: localhost)
         .PARAMETER Name
-            Single or multiple Route Name (IntelliSense availalble)
+            Single or multiple Route Name (IntelliSense available)
         .EXAMPLE
             Stop-WinBGPRouteMaintenance -ComputerName machine1,machine2 -Name route1.contoso.com
     #>
