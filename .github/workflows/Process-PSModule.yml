@@ -26,7 +26,7 @@ permissions:
 
 jobs:
   Process-PSModule:
-    uses: PSModule/Process-PSModule/.github/workflows/workflow.yml@16419d018975ece156bbc07d92738dd441efcb2c # v8.0.3
+    uses: PSModule/Process-PSModule/.github/workflows/workflow.yml@2471b535b3827de0271ed7e93d49427c17e452fc # v8.0.10
     secrets:
       PSGALLERY_API_KEY: ${{ secrets.APIKEY }}
       GitHubAppClientId: ${{ secrets.GH_APP_CLIENT_ID }}
